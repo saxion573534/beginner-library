@@ -17,6 +17,8 @@ public class Dvd {
     private final String aspect;
     private final long upc;
 
+    private boolean isLendedOut;
+
     public Dvd(int id, String title, String media, String studio, String sound, String versions, String rating, int year, String genre, String aspect, long upc) {
         this.id = id;
         this.title = title;
@@ -29,6 +31,16 @@ public class Dvd {
         this.genre = genre;
         this.aspect = aspect;
         this.upc = upc;
+
+        this.isLendedOut = false;
+    }
+
+    public boolean isLendedOut() {
+        return isLendedOut;
+    }
+
+    public void setLendedOut(boolean lendedOut) {
+        isLendedOut = lendedOut;
     }
 
     public static ArrayList<Dvd> readData() {
@@ -47,5 +59,10 @@ public class Dvd {
         }
 
         return dvds;
+    }
+
+    @Override
+    public String toString() {
+        return "Dvd -> %s (%d), rating: %s, year: %d".formatted(this.title, this.id, this.rating, this.year);
     }
 }

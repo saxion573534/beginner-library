@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -22,7 +23,7 @@ public class Main {
 
         int choice = -1;
         while (true) { // [C]ollection, [L]end list, lend [O]ut, take back [I]n or e[X]it: c
-            System.out.println("*** Option Selector ***");
+            System.out.println("*** Library Selector ***");
             System.out.println(" 1) Show Collection");
             System.out.println(" 2) Lend List");
             System.out.println(" 3) Lend Out");
@@ -46,10 +47,10 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    System.out.println(1);
+                    showCollection();
                     break;
                 case 2:
-                    System.out.println(2);
+                    showLendList();
                     break;
                 case 3:
                     System.out.println(3);
@@ -61,6 +62,38 @@ public class Main {
                     scanner.close();
                     return;
             }
+            pause(scanner);
         }
+    }
+
+    private void showCollection() {
+        System.out.println("\nCollection: ");
+        for (Book book : books) {
+            System.out.println((book.isLendedOut() ? "*" : " ") + " - " + book.toString());
+        }
+        for (Dvd dvd : dvds) {
+            System.out.println((dvd.isLendedOut() ? "*" : " ") + " - " + dvd.toString());
+        }
+        System.out.println("|==== END OF LIST ====|\n");
+    }
+
+    private void showLendList() {
+        System.out.println("\nLended out: ");
+        for (Book book : books) {
+            if(book.isLendedOut()) {
+                System.out.println(" - " + book.toString());
+            }
+        }
+        for (Dvd dvd : dvds) {
+            if(dvd.isLendedOut()) {
+                System.out.println(" - " + dvd.toString());
+            }
+        }
+        System.out.println("|==== END OF LIST ====|\n");
+    }
+
+    public static void pause(Scanner scanner) {
+        System.out.println("Press enter to continue...");
+        scanner.nextLine();
     }
 }

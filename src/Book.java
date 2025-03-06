@@ -11,12 +11,16 @@ public class Book {
     private final long isbn;
     private final String version;
 
+    private boolean isLendedOut;
+
     public Book(int id, String title, String author, long isbn, String version) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.isbn = isbn;
         this.version = version;
+
+        this.isLendedOut = false;
     }
 
     public static ArrayList<Book> readData() {
@@ -36,4 +40,18 @@ public class Book {
 
         return books;
     }
+
+    public boolean isLendedOut() {
+        return isLendedOut;
+    }
+
+    public void setLendedOut(boolean lendedOut) {
+        isLendedOut = lendedOut;
+    }
+
+    @Override
+    public String toString() {
+        return "Book -> %s (%d), isbn: %d, author: %s".formatted(this.title, this.id, this.isbn, this.author);
+    }
+
 }

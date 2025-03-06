@@ -1,6 +1,6 @@
 # beginner-library manager
-## made for Saxion @ 06/03/2025 22:39
+## made for Saxion @ 06/03/2025 23:41
 
-### TODO: implement the `saveData` method
-`saveData(Data data)`:<br>
-On restart it should not get rid of the changes you have made...
+### TODO: implement the `lendOut` method
+`lendOut(Book book)`:<br>
+`lendOut(Dvd dvd)`:<br>

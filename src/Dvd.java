@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Dvd {
+public class Dvd extends LibraryObject{
     //id;title;media;studio;sound;versions;rating;year;genre;aspect;upc
     private final int id;
     private final String title;
@@ -39,8 +39,12 @@ public class Dvd {
         return isLendedOut;
     }
 
-    public void setLendedOut(boolean lendedOut) {
-        isLendedOut = lendedOut;
+    public void lendOut() {
+        isLendedOut = true;
+    }
+
+    public void takeBackIn() {
+        isLendedOut = false;
     }
 
     public static ArrayList<Dvd> readData() {

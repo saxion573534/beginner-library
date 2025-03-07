@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -53,10 +54,10 @@ public class Main {
                     showLendList();
                     break;
                 case 3:
-                    System.out.println(3);
+                    lendOut();
                     break;
                 case 4:
-                    System.out.println(4);
+                    takeBackIn();
                     break;
                 case 5:
                     scanner.close();
@@ -90,6 +91,113 @@ public class Main {
             }
         }
         System.out.println("|==== END OF LIST ====|\n");
+    }
+
+    private void lendOut() {
+        System.out.println("*************** LibraryObject selector ***************");
+        int index = 1;
+        List<LibraryObject> availableItems = new ArrayList<>();
+
+        for (Book book : books) {
+            if (!book.isLendedOut()) {
+                availableItems.add(book);
+                System.out.printf("%d) - %s%n", index++, book.toString());
+            }
+        }
+
+        for (Dvd dvd : dvds) {
+            if (!dvd.isLendedOut()) {
+                availableItems.add(dvd);
+                System.out.printf("%d) - %s%n", index++, dvd.toString());
+            }
+        }
+
+        if (availableItems.isEmpty()) {
+            System.out.println("No items available for lending.");
+            return;
+        }
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("\nPlease select a value: ");
+        int choice = -1;
+
+        boolean validInput = false;
+        do {
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+                if (choice < 1 || choice > availableItems.size()) {
+                    System.err.print("That is not a valid option! Try again: ");
+                } else {
+                    validInput = true;
+                }
+            } catch (NumberFormatException e) {
+                System.err.print("That is not a number! Try again: ");
+            }
+        } while (!validInput);
+
+        LibraryObject selectedItem = availableItems.get(choice - 1);
+        if (selectedItem instanceof Book selectedBook) {
+            selectedBook.lendOut();
+            System.out.println("You have successfully lent out the book: " + selectedBook);
+        } else if (selectedItem instanceof Dvd selectedDvd) {
+            selectedDvd.lendOut();
+            System.out.println("You have successfully lent out the DVD: " + selectedDvd);
+        }
+    }
+
+    private void takeBackIn() {
+        System.out.println("*************** LibraryObject selector ***************");
+        int index = 1;
+        List<LibraryObject> availableItems = new ArrayList<>();
+
+        for (Book book : books) {
+            if (book.isLendedOut()) {
+                availableItems.add(book);
+                System.out.printf("%d) - %s%n", index++, book.toString());
+            }
+        }
+
+        for (Dvd dvd : dvds) {
+            if (dvd.isLendedOut()) {
+                availableItems.add(dvd);
+                System.out.printf("%d) - %s%n", index++, dvd.toString());
+            }
+        }
+
+        if (availableItems.isEmpty()) {
+            System.out.println("No items available for taking back in.");
+            return;
+        }
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("\nPlease select a value: ");
+        int choice = -1;
+
+        boolean validInput = false;
+        do {
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+                if (choice < 1 || choice > availableItems.size()) {
+                    System.err.print("That is not a valid option! Try again: ");
+                } else {
+                    validInput = true;
+                }
+            } catch (NumberFormatException e) {
+                System.err.print("That is not a number! Try again: ");
+            }
+        } while (!validInput);
+
+
+        LibraryObject selectedItem = availableItems.get(choice - 1);
+        if (selectedItem instanceof Book selectedBook) {
+            selectedBook.takeBackIn();
+            System.out.println("You have successfully taken back in the book: " + selectedBook);
+        } else if (selectedItem instanceof Dvd selectedDvd) {
+            selectedDvd.takeBackIn();
+            System.out.println("You have successfully taken back in the DVD: " + selectedDvd);
+        }
     }
 
     public static void pause(Scanner scanner) {

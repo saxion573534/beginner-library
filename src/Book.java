@@ -3,7 +3,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Book {
+public class Book extends LibraryObject {
+
     //id;title;author;isbn;version
     private final int id;
     private final String title;
@@ -45,8 +46,12 @@ public class Book {
         return isLendedOut;
     }
 
-    public void setLendedOut(boolean lendedOut) {
-        isLendedOut = lendedOut;
+    public void lendOut() {
+        isLendedOut = true;
+    }
+
+    public void takeBackIn() {
+        isLendedOut = false;
     }
 
     @Override
